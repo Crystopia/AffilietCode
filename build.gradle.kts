@@ -16,9 +16,10 @@ repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://oss.sonatype.org/content/groups/public/")
-    maven("https://repo.techscode.com/repository/techscode-apis/")
     maven("https://repo.flyte.gg/releases")
     maven("https://repo.codemc.io/repository/maven-snapshots/")
+    maven("https://repo.nightexpressdev.com/releases")
+    maven("https://jitpack.io")
 }
 
 dependencies {
@@ -29,15 +30,14 @@ dependencies {
 
     implementation("net.kyori:adventure-api:4.17.0")
 
-    compileOnly("me.TechsCode:UltraEconomyAPI:1.1.2")
+    implementation("su.nightexpress.coinsengine:CoinsEngine:2.4.1")
+    implementation("com.github.ItzSave:DeluxeCoinflipAPI:1.0.4")
 
     implementation("gg.flyte:twilight:1.1.16")
 
     compileOnly("dev.jorel:commandapi-bukkit-core:9.6.0")
     implementation("dev.jorel:commandapi-bukkit-shade-mojang-mapped:9.6.0")
     implementation("dev.jorel:commandapi-bukkit-kotlin:9.6.0")
-
-    implementation("net.wesjd:anvilgui:1.10.3-SNAPSHOT")
 }
 
 val targetJavaVersion = 21
@@ -83,7 +83,7 @@ paper {
     apiVersion = "1.19"
     authors = listOf("xyzjesper")
     serverDependencies {
-        register("UltraEconomy") {
+        register("CoinsEngine") {
             load = PaperPluginDescription.RelativeLoadOrder.BEFORE
         }
     }

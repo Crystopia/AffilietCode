@@ -3,11 +3,13 @@
 import io.papermc.paper.event.player.AsyncChatEvent
 import net.crystopia.affiliatecode.AffiliateCode
 import net.crystopia.affiliatecode.config.ConfigManager
+import net.crystopia.affiliatecode.utils.EcoManager
 import net.kyori.adventure.text.TextComponent
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import su.nightexpress.coinsengine.api.CoinsEngineAPI
 
 class ChatEvent : Listener {
 
@@ -22,7 +24,6 @@ class ChatEvent : Listener {
         if (AffiliateCode.instance.isInputCode.contains(player.uniqueId.toString())) {
             event.isCancelled = true
 
-            val currency = AffiliateCode.instance.ueapi?.currencies?.name(ConfigManager.settings.Currency)?.get()
             val reward = ConfigManager.settings.RewardAmount
 
             val reciverplayer = Bukkit.getOfflinePlayer(text)
@@ -48,11 +49,16 @@ class ChatEvent : Listener {
                 AffiliateCode.instance.isInputCode.remove(player.uniqueId.toString())
                 return
             } else {
-                var reciveraccount = AffiliateCode.instance.ueapi?.accounts?.uuid(reciverplayer.uniqueId)?.get()
-                val useraccount = AffiliateCode.instance.ueapi?.accounts?.uuid(player.uniqueId)?.get()
-
-                useraccount?.addBalance(currency, reward)
-                reciveraccount?.addBalance(currency, reward)
+                var reciveraccount = EcoManager().currency?.let {
+                    CoinsEngineAPI.addBalance(
+                        reciverplayer.uniqueId, it, reward.toDouble()
+                    )
+                };
+                var useraccount = EcoManager().currency?.let {
+                    CoinsEngineAPI.addBalance(
+                        player.uniqueId, it, reward.toDouble()
+                    )
+                };
 
                 userconfig?.joinedfor = reciverplayer.name.toString()
 

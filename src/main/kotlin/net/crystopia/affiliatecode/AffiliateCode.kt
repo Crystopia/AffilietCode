@@ -3,22 +3,20 @@ package net.crystopia.affiliatecode
 import dev.jorel.commandapi.CommandAPI
 import dev.jorel.commandapi.CommandAPIBukkitConfig
 import gg.flyte.twilight.twilight
-import me.TechsCode.UltraEconomy.UltraEconomy
-import me.TechsCode.UltraEconomy.UltraEconomyAPI
 import net.crystopia.affiliatecode.commands.AffiliateCodeCommand
 import net.crystopia.affiliatecode.config.ConfigManager
 import net.crystopia.affiliatecode.events.ChatEvent
 import net.crystopia.affiliatecode.events.PlayerJoinEvent
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
+import su.nightexpress.coinsengine.CoinsEnginePlugin
+import su.nightexpress.coinsengine.api.CoinsEngineAPI
 
 class AffiliateCode : JavaPlugin() {
 
     companion object {
         lateinit var instance: AffiliateCode
     }
-
-    var ueapi: UltraEconomyAPI? = UltraEconomy.getAPI()
 
     var isInputCode = hashMapOf<String, Boolean>()
 
@@ -32,13 +30,13 @@ class AffiliateCode : JavaPlugin() {
 
         val twilight = twilight(this)
 
-        // UltraEconomy Hook
-        if (Bukkit.getServer().pluginManager.getPlugin("UltraEconomy")?.isEnabled == true) {
-            ueapi = UltraEconomy.getAPI()
-            logger.info("[AffiliateCode] Hooking into UltraEconomy")
-            logger.info(ueapi.toString())
+        // CoinsEngine Hook
+        if (Bukkit.getServer().pluginManager.getPlugin("CoinsEngine")?.isEnabled == true) {
+            println(CoinsEngineAPI.getCurrency(ConfigManager.settings.Currency))
+            logger.info("[AffiliateCode] Hooking into CoinsEngine")
         } else {
-            logger.info("[AffiliateCode] No UltraEconomy version Found!")
+            logger.info("[AffiliateCode] No CoinsEngine version Found!")
+            Bukkit.getServer().pluginManager.disablePlugin(this)
         }
 
         // Commands
