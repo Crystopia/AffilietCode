@@ -1,15 +1,14 @@
 ﻿package net.crystopia.affiliatecode.events
 
 import io.papermc.paper.event.player.AsyncChatEvent
+import me.jesforge.econix.api.EconixAPI
 import net.crystopia.affiliatecode.AffiliateCode
 import net.crystopia.affiliatecode.config.ConfigManager
-import net.crystopia.affiliatecode.utils.EcoManager
 import net.kyori.adventure.text.TextComponent
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import su.nightexpress.coinsengine.api.CoinsEngineAPI
 
 class ChatEvent : Listener {
 
@@ -49,6 +48,11 @@ class ChatEvent : Listener {
                 AffiliateCode.instance.isInputCode.remove(player.uniqueId.toString())
                 return
             } else {
+
+                // println(AffiliateCode.instance.econix!!.getBalance(player, "crystals"))
+
+                return
+                /*
                 var reciveraccount = EcoManager().currency?.let {
                     CoinsEngineAPI.addBalance(
                         reciverplayer.uniqueId, it, reward.toDouble()
@@ -59,6 +63,7 @@ class ChatEvent : Listener {
                         player.uniqueId, it, reward.toDouble()
                     )
                 };
+                */
 
                 userconfig?.joinedfor = reciverplayer.name.toString()
 

@@ -3,14 +3,14 @@ package net.crystopia.affiliatecode
 import dev.jorel.commandapi.CommandAPI
 import dev.jorel.commandapi.CommandAPIBukkitConfig
 import gg.flyte.twilight.twilight
+import me.jesforge.econix.Econix
+import me.jesforge.econix.api.EconixAPI
 import net.crystopia.affiliatecode.commands.AffiliateCodeCommand
 import net.crystopia.affiliatecode.config.ConfigManager
 import net.crystopia.affiliatecode.events.ChatEvent
 import net.crystopia.affiliatecode.events.PlayerJoinEvent
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
-import su.nightexpress.coinsengine.CoinsEnginePlugin
-import su.nightexpress.coinsengine.api.CoinsEngineAPI
 
 class AffiliateCode : JavaPlugin() {
 
@@ -18,10 +18,13 @@ class AffiliateCode : JavaPlugin() {
         lateinit var instance: AffiliateCode
     }
 
+    var econix: EconixAPI? = null
+
     var isInputCode = hashMapOf<String, Boolean>()
 
     init {
         instance = this
+        econix = Econix.getAPI()
     }
 
     override fun onEnable() {
@@ -30,12 +33,11 @@ class AffiliateCode : JavaPlugin() {
 
         val twilight = twilight(this)
 
-        // CoinsEngine Hook
-        if (Bukkit.getServer().pluginManager.getPlugin("CoinsEngine")?.isEnabled == true) {
-            println(CoinsEngineAPI.getCurrency(ConfigManager.settings.Currency))
-            logger.info("[AffiliateCode] Hooking into CoinsEngine")
+        // Econix Hook
+        if (Bukkit.getServer().pluginManager.getPlugin("Econix")?.isEnabled == true) {
+            logger.info("Hooking into Econix")
         } else {
-            logger.info("[AffiliateCode] No CoinsEngine version Found!")
+            logger.warning("No Econix version Found!")
             Bukkit.getServer().pluginManager.disablePlugin(this)
         }
 

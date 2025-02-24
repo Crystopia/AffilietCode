@@ -20,6 +20,14 @@ repositories {
     maven("https://repo.codemc.io/repository/maven-snapshots/")
     maven("https://repo.nightexpressdev.com/releases")
     maven("https://jitpack.io")
+    maven {
+        url = uri("https://maven.pkg.github.com/Crystopia/Econix")
+        credentials {
+            username = findProperty("USER") as String
+            password = findProperty("TOKEN") as String
+        }
+    }
+
 }
 
 dependencies {
@@ -30,14 +38,14 @@ dependencies {
 
     implementation("net.kyori:adventure-api:4.17.0")
 
-    implementation("su.nightexpress.coinsengine:CoinsEngine:2.4.1")
-    implementation("com.github.ItzSave:DeluxeCoinflipAPI:1.0.4")
-
     implementation("gg.flyte:twilight:1.1.16")
 
     compileOnly("dev.jorel:commandapi-bukkit-core:9.6.0")
     implementation("dev.jorel:commandapi-bukkit-shade-mojang-mapped:9.6.0")
     implementation("dev.jorel:commandapi-bukkit-kotlin:9.6.0")
+
+    // Econix
+    compileOnly("me.jesforge:econix:1.1.7b1")
 }
 
 val targetJavaVersion = 21
@@ -83,7 +91,8 @@ paper {
     apiVersion = "1.19"
     authors = listOf("xyzjesper")
     serverDependencies {
-        register("CoinsEngine") {
+        register("Econix") {
+            joinClasspath = true
             load = PaperPluginDescription.RelativeLoadOrder.BEFORE
         }
     }
