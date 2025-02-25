@@ -45,7 +45,7 @@ dependencies {
     implementation("dev.jorel:commandapi-bukkit-kotlin:9.6.0")
 
     // Econix
-    compileOnly("me.jesforge:econix:1.1.7b1")
+    compileOnly("me.jesforge:econix:1.2.3")
 }
 
 val targetJavaVersion = 21

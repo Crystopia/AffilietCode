@@ -7,6 +7,7 @@ import net.crystopia.affiliatecode.config.ConfigManager
 import net.kyori.adventure.text.TextComponent
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
+import org.bukkit.OfflinePlayer
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 
@@ -49,21 +50,16 @@ class ChatEvent : Listener {
                 return
             } else {
 
-                println(AffiliateCode.instance.econix!!.getBalance(player, "crystals"))
-
-                return
-                /*
-                var reciveraccount = EcoManager().currency?.let {
-                    CoinsEngineAPI.addBalance(
-                        reciverplayer.uniqueId, it, reward.toDouble()
-                    )
-                };
-                var useraccount = EcoManager().currency?.let {
-                    CoinsEngineAPI.addBalance(
-                        player.uniqueId, it, reward.toDouble()
-                    )
-                };
-                */
+                AffiliateCode.instance.econix!!.addBalance(
+                    reciverplayer.uniqueId.toString(),
+                    "crystals",
+                    ConfigManager.settings.RewardAmount
+                )
+                AffiliateCode.instance.econix!!.addBalance(
+                    player.uniqueId.toString(),
+                    "crystals",
+                    ConfigManager.settings.RewardAmount
+                )
 
                 userconfig?.joinedfor = reciverplayer.name.toString()
 

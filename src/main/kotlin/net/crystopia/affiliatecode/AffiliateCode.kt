@@ -35,7 +35,6 @@ class AffiliateCode : JavaPlugin() {
         // Econix Hook
         if (Bukkit.getServer().pluginManager.getPlugin("Econix")?.isEnabled == true) {
             logger.info("Hooking into Econix")
-            logger.info(Econix.getAPI().toString())
             econix = Econix.getAPI()
         } else {
             logger.warning("No Econix version Found!")
