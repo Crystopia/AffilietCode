@@ -49,7 +49,7 @@ class ChatEvent : Listener {
                 return
             } else {
 
-                // println(AffiliateCode.instance.econix!!.getBalance(player, "crystals"))
+                println(AffiliateCode.instance.econix!!.getBalance(player, "crystals"))
 
                 return
                 /*
