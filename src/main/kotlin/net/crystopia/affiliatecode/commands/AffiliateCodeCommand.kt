@@ -39,21 +39,22 @@ class AffiliateCodeCommand {
 
                         meta.displayName(mm.deserialize("<color:#5cb6ff>You Affiliate Stats</color>"))
 
-                        val lore: List<Component> = mutableListOf(
-                            mm.deserialize("<gray>-----------------------</gray>"),
-                            mm.deserialize("<color:#bfcdff>Your Code</color><white>:</white> <gray>" + ConfigManager.playerdata.player[player.uniqueId.toString()]?.code),
-                            mm.deserialize("<color:#7afffd>Joined Count</color><white>:</white> <gray>" + ((ConfigManager.playerdata.player[player.uniqueId.toString()]?.joinedoveryou?.size?.toString()))),
-                            mm.deserialize(
-                                "<color:#ff94b2>Latest Join</color><white>:</white> <gray>" + (ConfigManager.playerdata.player[player.uniqueId.toString()]?.latest
-                                    ?: "none")
+                        val lore: List<Component> =
+                            mutableListOf(
+                                mm.deserialize("<gray>-----------------------</gray>"),
+                                mm.deserialize("<color:#bfcdff>Your Code</color><white>:</white> <gray>" + ConfigManager.playerdata.player[player.uniqueId.toString()]?.code),
+                                mm.deserialize("<color:#7afffd>Joined Count</color><white>:</white> <gray>" + ((ConfigManager.playerdata.player[player.uniqueId.toString()]?.joinedoveryou?.size?.toString()))),
+                                mm.deserialize(
+                                    "<color:#ff94b2>Latest Join</color><white>:</white> <gray>" + (ConfigManager.playerdata.player[player.uniqueId.toString()]?.latest.takeIf { it!!.isNotEmpty() }
+                                        ?: "None")
+                                ),
+                                mm.deserialize("<color:#2bff92>You Joined from</color><white>:</white> <gray>" + (ConfigManager.playerdata.player[player.uniqueId.toString()]?.joinedfor?.takeIf { it.isNotEmpty() }
+                                    ?: "None")
 
-                            ),
-                            mm.deserialize(
-                                "<color:#2bff92>You Joined from</color><white>:</white> <gray>" + (ConfigManager.playerdata.player[player.uniqueId.toString()]?.joinedfor
-                                    ?: "none")
+
+                                )
+
                             )
-
-                        )
                         meta.lore(
                             lore
                         )

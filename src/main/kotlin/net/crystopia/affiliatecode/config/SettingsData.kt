@@ -18,6 +18,6 @@ data class PlayerData(
 data class PlayerConfig(
     var code: String? = " ",
     var joinedoveryou: MutableList<String> = mutableListOf(),
-    var joinedfor: String? = " ",
-    var latest: String? = " ",
+    var joinedfor: String? = "",
+    var latest: String? = "",
 )
