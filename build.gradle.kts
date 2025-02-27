@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "net.crystopia"
-version = "1.1.0"
+version = "1.1.1"
 
 repositories {
     mavenCentral()
@@ -20,7 +20,6 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/")
     maven("https://repo.flyte.gg/releases")
     maven("https://repo.codemc.io/repository/maven-snapshots/")
-    maven("https://repo.nightexpressdev.com/releases")
     maven("https://jitpack.io")
     maven {
         url = uri("https://maven.pkg.github.com/Crystopia/Econix")
@@ -58,6 +57,9 @@ tasks.build {
 }
 
 tasks.shadowJar {
+    manifest {
+        attributes["paperweight-mappings-namespace"] = "mojang"
+    }
     relocate("net.wesjd.anvilgui", "net.crystopia.lib.anvilgui")
 }
 
@@ -67,20 +69,9 @@ tasks {
     }
 }
 
-tasks.jar {
-    manifest {
-        attributes["paperweight-mappings-namespace"] = "spigot"
-    }
-}
-tasks.shadowJar {
-    manifest {
-        attributes["paperweight-mappings-namespace"] = "spigot"
-    }
-}
-
 paper {
     name = "AffiliateCode"
-    version = "1.1.0"
+    version = "1.1.1"
     description = "Affiliate Plugin to reward player they hire player."
     main = "net.crystopia.affiliatecode.AffiliateCode"
     foliaSupported = false
