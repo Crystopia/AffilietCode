@@ -38,13 +38,11 @@ dependencies {
 
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
 
-    implementation("net.kyori:adventure-api:4.17.0")
-
     implementation("gg.flyte:twilight:1.1.16")
 
-    compileOnly("dev.jorel:commandapi-bukkit-core:9.6.0")
-    implementation("dev.jorel:commandapi-bukkit-shade-mojang-mapped:9.6.0")
-    implementation("dev.jorel:commandapi-bukkit-kotlin:9.6.0")
+    compileOnly("dev.jorel:commandapi-bukkit-core:9.7.0")
+    implementation("dev.jorel:commandapi-bukkit-shade-mojang-mapped:9.7.0")
+    implementation("dev.jorel:commandapi-bukkit-kotlin:9.7.0")
 
     // Econix
     compileOnly("me.jesforge:econix:1.2.3")
