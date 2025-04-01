@@ -21,13 +21,7 @@ repositories {
     maven("https://repo.flyte.gg/releases")
     maven("https://repo.codemc.io/repository/maven-snapshots/")
     maven("https://jitpack.io")
-    maven {
-        url = uri("https://maven.pkg.github.com/Crystopia/Econix")
-        credentials {
-            username = findProperty("USER") as String
-            password = findProperty("TOKEN") as String
-        }
-    }
+    maven("https://repo.crystopia.net/releases")
 
 }
 
