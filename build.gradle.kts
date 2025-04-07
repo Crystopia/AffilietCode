@@ -69,7 +69,7 @@ paper {
     description = "Affiliate Plugin to reward player they hire player."
     main = "net.crystopia.affiliatecode.AffiliateCode"
     foliaSupported = false
-    apiVersion = "1.19"
+    apiVersion = "1.21"
     authors = listOf("xyzjesper")
     serverDependencies {
         register("Econix") {
